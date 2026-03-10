@@ -2,7 +2,7 @@ services:
   # --- INGESTION & ACTUATION ---
 
   rest-poller:
-    build: ./source/backend/ingestion
+    build: ./backend/ingestion
     container_name: rest-poller
     platform: linux/amd64
     command: ["python", "-u", "rest_poller.py"]
@@ -14,7 +14,7 @@ services:
     restart: always
 
   stream-subscriber:
-    build: ./source/backend/ingestion
+    build: ./backend/ingestion
     container_name: stream-subscriber
     platform: linux/amd64
     command: ["python", "-u", "stream_subscriber.py"]
@@ -26,7 +26,7 @@ services:
     restart: always
 
   actuator-executor:
-    build: ./source/backend/ingestion
+    build: ./backend/ingestion
     container_name: actuator-executor
     platform: linux/amd64
     command: ["python", "-u", "consumer.py"]
@@ -41,7 +41,7 @@ services:
   # --- AUTOMATION LOGIC ---
 
   automation:
-    build: ./source/backend/automation
+    build: ./backend/automation
     container_name: automation-engine
     platform: linux/amd64
     command: ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
@@ -58,7 +58,7 @@ services:
   # --- FRONTEND ---
 
   frontend:
-    build: ./source/frontend
+    build: ./frontend
     container_name: mars-frontend
     platform: linux/amd64
     ports:
